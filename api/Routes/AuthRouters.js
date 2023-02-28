@@ -2,7 +2,7 @@ const router = require('express').Router();
 const bcrypt = require('bcrypt');
 const User = require('../models/Users.js');
 
-// Kayıt Olma Işlemi
+// Kayıt Olma 
 router.post('/register', async (req, res) => {
   try {
     const { userName, lastName, email, password, gender } = req.body;
