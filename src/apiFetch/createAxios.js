@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-export const baseApiName = async () => {
+export const baseApiUrl = () => {
   return axios.create({
-    baseURL: 'https://jsonplaceholder.typicode.com/todos/1',
+    baseURL: 'http://localhost:8000',
   });
 };

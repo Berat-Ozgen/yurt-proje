@@ -6,24 +6,13 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Register } from './pages/Register';
 import { Profile } from './pages/Profile';
 import { useEffect, useState } from 'react';
-import { baseApiName } from './apiFetch/createAxios';
 import Landing from './pages/Landing';
 
 export function App() {
-  const deneme = async () => {
-    await baseApiName()
-      .get('')
-      .then(res => console.log(res.data));
-  };
+  const [users, setUsers] = useState(false);
 
-  const [users, setUsers] = useState(false)
-
-  useEffect(() => {
-    deneme();
-  }, []);
-
-  if(!users){
-    return <Landing setUsers={setUsers}/>
+  if (!users) {
+    return <Landing setUsers={setUsers} />;
   }
 
   return (
@@ -35,7 +24,7 @@ export function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />
-        {/* <Footer /> */}
+          {/* <Footer /> */}
         </Routes>
       </BrowserRouter>
     </div>

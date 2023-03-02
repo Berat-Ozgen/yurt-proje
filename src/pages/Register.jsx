@@ -1,6 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { userRegisterFetch } from '../reduxSlice/registerPostSlice';
 
 export const Register = () => {
+  const [registerData, setRegisterData] = useState({
+    userName: '',
+    lastName: '',
+    email: '',
+    password: '',
+    gender: '',
+  });
+  const dispatch = useDispatch();
+
+  const hadleRegister = async () => {
+    await dispatch(userRegisterFetch(registerData));
+  };
+
   return (
     <div className="min-w-screen min-h-screen bg-gray-900 flex items-center justify-center px-5 py-5">
       <div
@@ -226,7 +241,12 @@ export const Register = () => {
                       <i className="mdi mdi-account-outline text-gray-400 text-lg" />
                     </div>
                     <input
-                      type="text"
+                      onChange={e =>
+                        setRegisterData({
+                          ...registerData,
+                          userName: e.target.value,
+                        })
+                      }
                       className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                       placeholder="Kullanici ismi"
                       required
@@ -239,7 +259,12 @@ export const Register = () => {
                       <i className="mdi mdi-account-outline text-gray-400 text-lg" />
                     </div>
                     <input
-                      type="text"
+                      onChange={e =>
+                        setRegisterData({
+                          ...registerData,
+                          lastName: e.target.value,
+                        })
+                      }
                       className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                       placeholder="Kullanici soyismi"
                       required
@@ -254,7 +279,12 @@ export const Register = () => {
                       <i className="mdi mdi-email-outline text-gray-400 text-lg" />
                     </div>
                     <input
-                      type="email"
+                      onChange={e =>
+                        setRegisterData({
+                          ...registerData,
+                          email: e.target.value,
+                        })
+                      }
                       className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                       placeholder="email"
                       required
@@ -269,6 +299,12 @@ export const Register = () => {
                       <i className="mdi mdi-lock-outline text-gray-400 text-lg" />
                     </div>
                     <input
+                      onChange={e =>
+                        setRegisterData({
+                          ...registerData,
+                          password: e.target.value,
+                        })
+                      }
                       type="password"
                       className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                       placeholder="password"
@@ -277,7 +313,16 @@ export const Register = () => {
                   </div>
                 </div>
               </div>
-              <select className="select select-primary w-full max-w-xs" required>
+              <select
+                onChange={e =>
+                  setRegisterData({
+                    ...registerData,
+                    gender: e.target.value,
+                  })
+                }
+                className="select select-primary w-full max-w-xs"
+                required
+              >
                 <option disabled selected>
                   Cinsiyet
                 </option>
@@ -286,7 +331,10 @@ export const Register = () => {
               </select>
               <div className="flex -mx-3 mt-10">
                 <div className="w-full px-3 mb-5">
-                  <button className="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold">
+                  <button
+                    onClick={hadleRegister}
+                    className="block w-full max-w-xs mx-auto bg-indigo-500 hover:bg-indigo-700 focus:bg-indigo-700 text-white rounded-lg px-3 py-3 font-semibold"
+                  >
                     KAYIT OL
                   </button>
                 </div>
