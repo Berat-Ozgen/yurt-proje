@@ -1,6 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { apiLoginPostFetch } from '../reduxSlice/loginPostSlice';
 
 export const Login = () => {
+  const [formData, setformData] = useState({ email: '', password: '' });
+
+  const navigate = useNavigate();
+  const a = { formData: formData, navigate: navigate };
+
+  const dispacth = useDispatch();
+
+  const handleLogin = () => {
+    dispacth(apiLoginPostFetch(a));
+  };
+
   return (
     <div className="h-screen flex">
       <div className="flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center">
@@ -18,7 +32,7 @@ export const Login = () => {
         </div>
       </div>
       <div className="flex w-1/2 justify-center items-center bg-white">
-        <form className="bg-white">
+        <div className="bg-white">
           <h1 className="text-gray-800 font-bold text-2xl mb-1">
             Hello Again!
           </h1>
@@ -39,6 +53,9 @@ export const Login = () => {
               />
             </svg>
             <input
+              onChange={e =>
+                setformData({ ...formData, email: e.target.value })
+              }
               className="pl-2 outline-none border-none"
               type="text"
               name
@@ -60,6 +77,9 @@ export const Login = () => {
               />
             </svg>
             <input
+              onChange={e =>
+                setformData({ ...formData, password: e.target.value })
+              }
               className="pl-2 outline-none border-none"
               type="text"
               name
@@ -68,7 +88,7 @@ export const Login = () => {
             />
           </div>
           <button
-            type="submit"
+            onClick={handleLogin}
             className="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2"
           >
             Login
@@ -76,7 +96,7 @@ export const Login = () => {
           <span className="text-sm ml-2 hover:text-blue-500 cursor-pointer">
             Forgot Password ?
           </span>
-        </form>
+        </div>
       </div>
     </div>
   );

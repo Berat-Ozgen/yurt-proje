@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import Landing from './pages/Landing';
 
 export function App() {
-  const [users, setUsers] = useState(false);
+  const [users, setUsers] = useState(true);
 
   if (!users) {
     return <Landing setUsers={setUsers} />;
