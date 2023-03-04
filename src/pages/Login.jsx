@@ -1,18 +1,27 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useEffect, useRef, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { apiLoginPostFetch } from '../reduxSlice/loginPostSlice';
 
 export const Login = () => {
-  const [formData, setformData] = useState({ email: '', password: '' });
-
-  const navigate = useNavigate();
-  const a = { formData: formData, navigate: navigate };
-
   const dispacth = useDispatch();
+  const navigate = useNavigate();
+  const { loginData } = useSelector(state => state.loginSlice);
+
+  const email = useRef(null);
+  const password = useRef(null);
+
+  useEffect(() => {});
 
   const handleLogin = () => {
-    dispacth(apiLoginPostFetch(a));
+    const loginPost = {};
+    dispacth(
+      apiLoginPostFetch({
+        email: email?.current?.value,
+        password: password?.current?.value,
+        navigate,
+      })
+    );
   };
 
   return (
@@ -53,9 +62,7 @@ export const Login = () => {
               />
             </svg>
             <input
-              onChange={e =>
-                setformData({ ...formData, email: e.target.value })
-              }
+              ref={email}
               className="pl-2 outline-none border-none"
               type="text"
               name
@@ -77,9 +84,7 @@ export const Login = () => {
               />
             </svg>
             <input
-              onChange={e =>
-                setformData({ ...formData, password: e.target.value })
-              }
+              ref={password}
               className="pl-2 outline-none border-none"
               type="text"
               name

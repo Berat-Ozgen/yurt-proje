@@ -9,7 +9,7 @@ import { useEffect, useState } from 'react';
 import Landing from './pages/Landing';
 
 export function App() {
-  const [users, setUsers] = useState(true);
+  const [users, setUsers] = useState(false);
 
   if (!users) {
     return <Landing setUsers={setUsers} />;
@@ -20,7 +20,7 @@ export function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/home" index element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />

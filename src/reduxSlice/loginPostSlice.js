@@ -1,24 +1,24 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { apiLoginPost } from '../apiFetch/loginPost';
 
-export const apiLoginPostFetch = createAsyncThunk(
-  'userLogin',
-  async a => {
-    const response = await apiLoginPost(a.loginData).then(res => {
-      if (res.status === 200) {
-        a.navigate('/home')
-        return res;
-      } else {
-        alert('işlem başarısız oldu');
-      }
-    });
+export const apiLoginPostFetch = createAsyncThunk('userLogin', async a => {
+  console.log(a);
+  const response = await apiLoginPost(a.loginPost).then(res => {
+    if (res.status === 200) {
+      a.navigate('/home');
+      return res;
+    } else {
+      alert('işlem başarısız oldu');
+    }
+  });
 
-    return response?.data;
-  }
-);
+  return response?.data;
+});
+
+const userData = localStorage.getItem('user');
 
 const initialState = {
-  loginData: '',
+  loginData: userData ? JSON.parse(userData) : null,
 };
 
 export const loginSlice = createSlice({
@@ -27,6 +27,7 @@ export const loginSlice = createSlice({
   reducers: {},
   extraReducers(builder) {
     builder.addCase(apiLoginPostFetch.fulfilled, (state, action) => {
+      localStorage.setItem('user', JSON.stringify(action.payload));
       state.loginData = action.payload;
     });
   },
