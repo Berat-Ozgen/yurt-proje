@@ -12,7 +12,9 @@ export const Login = () => {
   const email = useRef(null);
   const password = useRef(null);
 
-  useEffect(() => {});
+  useEffect(() => {
+    loginData && navigate('/');
+  });
 
   const handleLogin = () => {
     dispacth(

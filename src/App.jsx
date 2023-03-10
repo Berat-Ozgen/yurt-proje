@@ -19,7 +19,7 @@ export function App() {
       <BrowserRouter>
         <Navbar />
         <Routes>
-          <Route path="/home" index element={<Home />} />
+          <Route path="/" index element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile" element={<Profile />} />

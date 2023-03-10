@@ -21,6 +21,12 @@ const initialState = {
   loginData: userData ? JSON.parse(userData) : null,
 };
 
+const filteredObj = action => {
+  return Object.keys(action.payload)
+    .filter(key => key !== 'password')
+    .reduce((res, key) => ((res[key] = action.payload[key]), res), {});
+};
+
 export const loginSlice = createSlice({
   name: 'loginSlice',
   initialState,
@@ -32,8 +38,8 @@ export const loginSlice = createSlice({
   },
   extraReducers(builder) {
     builder.addCase(apiLoginPostFetch.fulfilled, (state, action) => {
-      localStorage.setItem('user', JSON.stringify(action.payload));
-      state.loginData = action.payload;
+      localStorage.setItem('user', JSON.stringify(filteredObj(action)));
+      state.loginData = filteredObj(action);
     });
   },
 });

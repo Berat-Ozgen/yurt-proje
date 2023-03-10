@@ -28,7 +28,7 @@ export const Navbar = () => {
             <div className=" flex w-36 justify-between items-center">
               <div>
                 <img
-                  class="w-10 h-10 rounded-full"
+                  className="w-10 h-10 rounded-full"
                   src="https://img.a.transfermarkt.technology/portrait/big/8198-1673305564.jpg?lm=1"
                   alt="Rounded avatar"
                 />
