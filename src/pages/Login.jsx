@@ -14,11 +14,12 @@ export const Login = () => {
   useEffect(() => {});
 
   const handleLogin = () => {
-    const loginPost = {};
     dispacth(
       apiLoginPostFetch({
-        email: email?.current?.value,
-        password: password?.current?.value,
+        loginPost: {
+          email: email?.current?.value,
+          password: password?.current?.value,
+        },
         navigate,
       })
     );

@@ -1,18 +1,17 @@
 import { Navbar } from './components/Navbar';
-import { Footer } from './components/Footer';
 import { Login } from './pages/Login';
 import { Home } from './pages/Home';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Register } from './pages/Register';
 import { Profile } from './pages/Profile';
-import { useEffect, useState } from 'react';
 import Landing from './pages/Landing';
+import { useSelector } from 'react-redux';
 
 export function App() {
-  const [users, setUsers] = useState(false);
+  const { loginData } = useSelector(state => state.loginSlice);
 
-  if (!users) {
-    return <Landing setUsers={setUsers} />;
+  if (!loginData) {
+    return <Landing />;
   }
 
   return (
