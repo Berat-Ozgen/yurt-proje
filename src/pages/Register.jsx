@@ -1,19 +1,32 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { userRegisterFetch } from '../reduxSlice/registerPostSlice';
 
 export const Register = () => {
-  const [registerData, setRegisterData] = useState({
-    userName: '',
-    lastName: '',
-    email: '',
-    password: '',
-    gender: '',
-  });
+  // const [registerData, setRegisterData] = useState({
+  //   userName: '',
+  //   lastName: '',
+  //   email: '',
+  //   password: '',
+  //   gender: '',
+  // });
   const dispatch = useDispatch();
 
-  const hadleRegister = async () => {
-    await dispatch(userRegisterFetch(registerData));
+  const userName = useRef(null);
+  const lastName = useRef(null);
+  const email = useRef(null);
+  const password = useRef(null);
+  const gender = useRef(null);
+
+  const hadleRegister = () => {
+    const registerData = {
+      userName: userName?.current?.value,
+      lastName: lastName.current?.value,
+      email: email.current?.value,
+      password: password.current?.value,
+      gender: gender.current?.value,
+    };
+    dispatch(userRegisterFetch(registerData));
   };
 
   return (
@@ -241,12 +254,7 @@ export const Register = () => {
                       <i className="mdi mdi-account-outline text-gray-400 text-lg" />
                     </div>
                     <input
-                      onChange={e =>
-                        setRegisterData({
-                          ...registerData,
-                          userName: e.target.value,
-                        })
-                      }
+                      ref={userName}
                       className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                       placeholder="Kullanici ismi"
                       required
@@ -259,12 +267,7 @@ export const Register = () => {
                       <i className="mdi mdi-account-outline text-gray-400 text-lg" />
                     </div>
                     <input
-                      onChange={e =>
-                        setRegisterData({
-                          ...registerData,
-                          lastName: e.target.value,
-                        })
-                      }
+                      ref={lastName}
                       className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                       placeholder="Kullanici soyismi"
                       required
@@ -279,12 +282,7 @@ export const Register = () => {
                       <i className="mdi mdi-email-outline text-gray-400 text-lg" />
                     </div>
                     <input
-                      onChange={e =>
-                        setRegisterData({
-                          ...registerData,
-                          email: e.target.value,
-                        })
-                      }
+                      ref={email}
                       className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                       placeholder="email"
                       required
@@ -299,12 +297,7 @@ export const Register = () => {
                       <i className="mdi mdi-lock-outline text-gray-400 text-lg" />
                     </div>
                     <input
-                      onChange={e =>
-                        setRegisterData({
-                          ...registerData,
-                          password: e.target.value,
-                        })
-                      }
+                      ref={password}
                       type="password"
                       className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                       placeholder="password"
@@ -314,12 +307,7 @@ export const Register = () => {
                 </div>
               </div>
               <select
-                onChange={e =>
-                  setRegisterData({
-                    ...registerData,
-                    gender: e.target.value,
-                  })
-                }
+                ref={gender}
                 className="select select-primary w-full max-w-xs"
                 required
               >

@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { BiLogOut } from 'react-icons/bi';
+import { logOut } from '../reduxSlice/loginPostSlice';
 
 export const Navbar = () => {
-  const [user, setUser] = useState(false);
+  const dispatch = useDispatch();
+  const { loginData } = useSelector(state => state.loginSlice);
+  const [deneme, setDeneme] = useState('');
+
+  console.log(deneme);
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
@@ -17,12 +24,20 @@ export const Navbar = () => {
           </span>
         </Link>
         <div className="flex items-center md:order-2">
-          {user ? (
-            <img
-              class="w-10 h-10 rounded-full"
-              src="https://img.a.transfermarkt.technology/portrait/big/8198-1673305564.jpg?lm=1"
-              alt="Rounded avatar"
-            />
+          {loginData ? (
+            <div className=" flex w-36 justify-between items-center">
+              <div>
+                <img
+                  class="w-10 h-10 rounded-full"
+                  src="https://img.a.transfermarkt.technology/portrait/big/8198-1673305564.jpg?lm=1"
+                  alt="Rounded avatar"
+                />
+              </div>
+              <div>{loginData?.userName.toUpperCase()}</div>
+              <div>
+                <BiLogOut size={30} onClick={() => dispatch(logOut())} />
+              </div>
+            </div>
           ) : (
             <div className="flex gap-5 text-slate-200">
               <Link to={'/login'}>giriş yap</Link>
@@ -120,6 +135,7 @@ export const Navbar = () => {
                 <input
                   className="outline-none p-[1px] rounded-md w-72 text-gray-700 pl-4"
                   placeholder="kullanıcı ara"
+                  onChange={e => setDeneme(e.target.value)}
                 />
               </span>
             </li>

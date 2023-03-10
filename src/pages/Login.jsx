@@ -6,6 +6,7 @@ import { apiLoginPostFetch } from '../reduxSlice/loginPostSlice';
 export const Login = () => {
   const dispacth = useDispatch();
   const navigate = useNavigate();
+  const [eyes, setEyes] = useState(false);
   const { loginData } = useSelector(state => state.loginSlice);
 
   const email = useRef(null);

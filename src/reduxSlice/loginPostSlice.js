@@ -24,7 +24,12 @@ const initialState = {
 export const loginSlice = createSlice({
   name: 'loginSlice',
   initialState,
-  reducers: {},
+  reducers: {
+    logOut: state => {
+      localStorage.removeItem('user');
+      window.location.reload();
+    },
+  },
   extraReducers(builder) {
     builder.addCase(apiLoginPostFetch.fulfilled, (state, action) => {
       localStorage.setItem('user', JSON.stringify(action.payload));
@@ -33,4 +38,5 @@ export const loginSlice = createSlice({
   },
 });
 
+export const { logOut } = loginSlice.actions;
 export default loginSlice.reducer;

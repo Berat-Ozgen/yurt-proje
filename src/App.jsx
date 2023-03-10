@@ -10,9 +10,9 @@ import { useSelector } from 'react-redux';
 export function App() {
   const { loginData } = useSelector(state => state.loginSlice);
 
-  if (!loginData) {
-    return <Landing />;
-  }
+  // if (!loginData) {
+  //   return <Landing />;
+  // }
 
   return (
     <div className="h-full">
