@@ -19,6 +19,10 @@ const UserSchema = mongoose.Schema(
       type: String,
       default: '',
     },
+    city: {
+      type: String,
+      required: true,
+    },
     password: {
       type: String,
       required: true,
@@ -30,6 +34,14 @@ const UserSchema = mongoose.Schema(
     gender: {
       type: String,
       required: true,
+    },
+    Followers: {
+      type: Array,
+      default: [],
+    },
+    Following: {
+      type: Array,
+      default: [],
     },
   },
   {

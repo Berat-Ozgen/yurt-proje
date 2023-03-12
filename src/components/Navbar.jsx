@@ -1,15 +1,33 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BiLogOut } from 'react-icons/bi';
 import { logOut } from '../reduxSlice/loginPostSlice';
+import { baseApiUrl } from '../apiFetch/createAxios';
 
 export const Navbar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { loginData } = useSelector(state => state.loginSlice);
-  const [deneme, setDeneme] = useState('');
+  const [userInfo, setUserInfo] = useState('');
+  const [allUsers, setAllUsers] = useState([]);
 
-  console.log(deneme);
+  const userInfoFecth = () => {
+    baseApiUrl()
+      .get('/api/users/get-all-users')
+      .then(res => {
+        res.status === 200 ? setAllUsers(res.data) : alert('işlem başarısız');
+      });
+  };
+
+  const navbarInputChange = e => {
+    setUserInfo(e.target.value);
+  };
+
+  const filtredUsers = allUsers?.filter(item =>
+    item.userName.startsWith(userInfo)
+  );
+
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
@@ -29,8 +47,9 @@ export const Navbar = () => {
               <div>
                 <img
                   className="w-10 h-10 rounded-full"
-                  src="https://img.a.transfermarkt.technology/portrait/big/8198-1673305564.jpg?lm=1"
+                  src={loginData?.image}
                   alt="Rounded avatar"
+                  onClick={() => navigate(`/profile/${loginData._id}`)}
                 />
               </div>
               <div>{loginData?.userName.toUpperCase()}</div>
@@ -135,7 +154,8 @@ export const Navbar = () => {
                 <input
                   className="outline-none p-[1px] rounded-md w-72 text-gray-700 pl-4"
                   placeholder="kullanıcı ara"
-                  onChange={e => setDeneme(e.target.value)}
+                  onChange={e => navbarInputChange(e)}
+                  onFocus={userInfoFecth}
                 />
               </span>
             </li>

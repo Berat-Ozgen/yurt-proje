@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { apiLoginPost } from '../apiFetch/loginPost';
 
 export const apiLoginPostFetch = createAsyncThunk('userLogin', async a => {
-  console.log(a);
   const response = await apiLoginPost(a.loginPost).then(res => {
     if (res.status === 200) {
       a.navigate('/home');

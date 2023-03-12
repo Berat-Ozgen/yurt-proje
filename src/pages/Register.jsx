@@ -17,6 +17,7 @@ export const Register = () => {
   const email = useRef(null);
   const password = useRef(null);
   const gender = useRef(null);
+  const city = useRef(null);
 
   const hadleRegister = () => {
     const registerData = {
@@ -25,6 +26,7 @@ export const Register = () => {
       email: email.current?.value,
       password: password.current?.value,
       gender: gender.current?.value,
+      city: city.current?.value,
     };
     dispatch(userRegisterFetch(registerData));
   };
@@ -291,7 +293,7 @@ export const Register = () => {
                 </div>
               </div>
               <div className="flex -mx-3">
-                <div className="w-full px-3 mb-12">
+                <div className="w-full px-3 mb-6">
                   <div className="flex">
                     <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
                       <i className="mdi mdi-lock-outline text-gray-400 text-lg" />
@@ -301,6 +303,21 @@ export const Register = () => {
                       type="password"
                       className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                       placeholder="password"
+                      required
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className="flex -mx-3">
+                <div className="w-full px-3 mb-6">
+                  <div className="flex">
+                    <div className="w-10 z-10 pl-1 text-center pointer-events-none flex items-center justify-center">
+                      <i className="mdi mdi-lock-outline text-gray-400 text-lg" />
+                    </div>
+                    <input
+                      ref={city}
+                      className="w-full -ml-10 pl-10 pr-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                      placeholder="city name"
                       required
                     />
                   </div>
