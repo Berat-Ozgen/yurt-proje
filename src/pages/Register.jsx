@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { userRegisterFetch } from '../reduxSlice/registerPostSlice';
 
 export const Register = () => {
@@ -11,6 +12,7 @@ export const Register = () => {
   //   gender: '',
   // });
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const userName = useRef(null);
   const lastName = useRef(null);
@@ -28,7 +30,7 @@ export const Register = () => {
       gender: gender.current?.value,
       city: city.current?.value,
     };
-    dispatch(userRegisterFetch(registerData));
+    dispatch(userRegisterFetch({registerData,navigate}));
   };
 
   return (

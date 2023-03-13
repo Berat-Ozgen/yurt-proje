@@ -3,15 +3,10 @@ import { apiRegisterPost } from '../apiFetch/registerPost';
 
 export const userRegisterFetch = createAsyncThunk(
   'userRegister',
-  async registerData => {
-    const response = await apiRegisterPost(registerData).then(res => {
-      if (res.status === 200) {
-        alert('işlem başarılı bir şekilde gerçekleşti');
-        return res;
-      } else {
-        alert('işlem başarısız oldu');
-      }
-    });
+  async a => {
+    const response = await apiRegisterPost(a.registerData).then(res => {
+      
+    }).finally(a.navigate('/login'))
 
     return response?.data;
   }

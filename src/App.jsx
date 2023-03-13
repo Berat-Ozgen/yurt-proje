@@ -1,4 +1,5 @@
 import { Navbar } from './components/Navbar';
+import { Footer } from './components/Footer';
 import { Login } from './pages/Login';
 import { Home } from './pages/Home';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
@@ -23,8 +24,8 @@ export function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile/:id" element={<Profile />} />
-          {/* <Footer /> */}
         </Routes>
+        <Footer />
       </BrowserRouter>
     </div>
   );

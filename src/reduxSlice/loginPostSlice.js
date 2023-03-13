@@ -30,8 +30,9 @@ export const loginSlice = createSlice({
   name: 'loginSlice',
   initialState,
   reducers: {
-    logOut: state => {
+    logOut: (state,action) => {
       localStorage.removeItem('user');
+      action.payload('/login')
       window.location.reload();
     },
   },

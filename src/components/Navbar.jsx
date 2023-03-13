@@ -28,6 +28,11 @@ export const Navbar = () => {
     item.userName.startsWith(userInfo)
   );
 
+  const handleGetUser = (id) => {
+    navigate(`/profile/${id}`)
+    setUserInfo('')
+  }
+
   return (
     <nav className="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-900">
       <div className="container flex flex-wrap items-center justify-between mx-auto">
@@ -54,7 +59,7 @@ export const Navbar = () => {
               </div>
               <div>{loginData?.userName.toUpperCase()}</div>
               <div>
-                <BiLogOut size={30} onClick={() => dispatch(logOut())} />
+                <BiLogOut size={30} onClick={() => dispatch(logOut(navigate))} />
               </div>
             </div>
           ) : (
@@ -149,14 +154,20 @@ export const Navbar = () => {
             <li>
               <span
                 href="#"
-                className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                className="block py-2 pl-3 pr-4 text-gray-700 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 relative"
               >
                 <input
-                  className="outline-none p-[1px] rounded-md w-72 text-gray-700 pl-4"
+                  className="outline-none p-[1px] rounded-md w-72 text-gray-100 pl-4"
                   placeholder="kullanıcı ara"
+                  value={userInfo}
                   onChange={e => navbarInputChange(e)}
                   onFocus={userInfoFecth}
                 />
+                <div className="text-white absolute w-full mt-2 rounded bg-slate-700">
+                  {userInfo.length > 3 && filtredUsers.map(user => (
+                    <div key={user._id} onClick={() => handleGetUser(user._id)} className='px-2 py-1 cursor-pointer'>{user.userName}</div>
+                  ))}
+                </div>
               </span>
             </li>
             <li>
